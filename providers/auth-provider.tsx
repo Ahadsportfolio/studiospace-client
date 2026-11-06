@@ -29,7 +29,7 @@ type AuthContextValue = {
     password: string,
     image?: string,
   ) => Promise<void>;
-  googleLogin: () => Promise<void>;
+  googleLogin: (callbackURL?: string) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -128,10 +128,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [],
   );
 
-  const googleLogin = useCallback(async () => {
+  const googleLogin = useCallback(async (callbackURL?: string) => {
     const result = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: callbackURL || "/",
     });
     if (result.error) {
       throw new Error(result.error.message || "Unable to sign in with Google.");
