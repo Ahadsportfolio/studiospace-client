@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   CalendarCheck,
   Clock,
@@ -11,14 +12,17 @@ import {
   Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/providers/auth-provider";
 import type { Studio } from "@/types/studio";
 
 interface BookingPanelProps {
   studio: Studio;
-  onBookClick?: () => void;
+  onBookClick?: (hours?: number) => void;
 }
 
 export function BookingPanel({ studio, onBookClick }: BookingPanelProps) {
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const [isSaved, setIsSaved] = useState(false);
   const [selectedHours, setSelectedHours] = useState(4);
 
@@ -54,8 +58,27 @@ export function BookingPanel({ studio, onBookClick }: BookingPanelProps) {
   };
 
   const handleBookNow = () => {
+    if (!user && !authLoading) {
+      toast.info("Please sign in to reserve this workspace.", {
+        description: "You'll be returned here after signing in to complete your booking.",
+      });
+      router.push(
+        `/login?redirect=${encodeURIComponent(`/studios/${studio._id}`)}`,
+      );
+      return;
+    }
+
+    if (
+      user?.email &&
+      studio.ownerEmail &&
+      user.email.toLowerCase() === studio.ownerEmail.toLowerCase()
+    ) {
+      toast.error("Hosts cannot book their own studio spaces.");
+      return;
+    }
+
     if (onBookClick) {
-      onBookClick();
+      onBookClick(selectedHours);
     } else {
       toast.info("Opening booking calendar...", {
         description:

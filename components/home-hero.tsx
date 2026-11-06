@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
@@ -70,12 +70,17 @@ const HERO_SLIDES: HeroSlide[] = [
   },
 ];
 
-export function HomeHero() {
-  const [mounted, setMounted] = useState(false);
+const emptySubscribe = () => () => {};
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+}
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+export function HomeHero() {
+  const mounted = useIsMounted();
 
   const firstSlide = HERO_SLIDES[0];
 

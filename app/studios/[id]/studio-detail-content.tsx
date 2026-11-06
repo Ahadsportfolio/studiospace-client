@@ -31,6 +31,7 @@ import {
 import { toast } from "sonner";
 import { apiFetch } from "@/lib/api";
 import type { Studio } from "@/types/studio";
+import { BookingModal } from "./booking-modal";
 import { BookingPanel } from "./booking-panel";
 import { GalleryCarousel } from "./gallery-carousel";
 import { StudioDetailSkeleton } from "./studio-detail-skeleton";
@@ -141,6 +142,8 @@ export function StudioDetailContent({ params }: StudioDetailContentProps) {
   const [is404, setIs404] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [refreshIndex, setRefreshIndex] = useState(0);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [bookingInitialHours, setBookingInitialHours] = useState(4);
 
   useEffect(() => {
     let ignore = false;
@@ -642,7 +645,21 @@ export function StudioDetailContent({ params }: StudioDetailContentProps) {
 
         {/* Right Content (4 cols): Sticky "Book Workspace Now" Panel */}
         <div className="lg:col-span-4">
-          <BookingPanel studio={studio} />
+          <BookingPanel
+            studio={studio}
+            onBookClick={(hours) => {
+              if (typeof hours === "number") {
+                setBookingInitialHours(hours);
+              }
+              setIsBookingModalOpen(true);
+            }}
+          />
+          <BookingModal
+            isOpen={isBookingModalOpen}
+            onClose={() => setIsBookingModalOpen(false)}
+            studio={studio}
+            initialHours={bookingInitialHours}
+          />
         </div>
       </div>
     </div>
