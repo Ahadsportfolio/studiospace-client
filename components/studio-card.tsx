@@ -117,3 +117,4 @@ export function StudioCard({ studio }: StudioCardProps) {
     </article>
   );
 }
+
