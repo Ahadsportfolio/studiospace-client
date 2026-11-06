@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: studiospace-light --default, studiospace-dark --prefersdark;
+  exclude: join;
+}
+
+@plugin "daisyui/theme" {
+  name: "studiospace-light";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #f8f6f0;
+  --color-base-200: #efede5;
+  --color-base-300: #e2dfd4;
+  --color-base-content: #1f302d;
+  --color-primary: #bd583d;
+  --color-primary-content: #fffaf3;
+  --color-secondary: #49675e;
+  --color-secondary-content: #f8f6f0;
+  --color-accent: #d3a344;
+  --color-accent-content: #1f302d;
+  --color-neutral: #283a36;
+  --color-neutral-content: #f8f6f0;
+  --color-info: #4a7b84;
+  --color-info-content: #f8f6f0;
+  --color-success: #4d785b;
+  --color-success-content: #f8f6f0;
+  --color-warning: #bf8733;
+  --color-warning-content: #1f302d;
+  --color-error: #b94d45;
+  --color-error-content: #fffaf3;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
+}
+
+@plugin "daisyui/theme" {
+  name: "studiospace-dark";
+  color-scheme: dark;
+  --color-base-100: #172321;
+  --color-base-200: #202e2b;
+  --color-base-300: #34413d;
+  --color-base-content: #f0eee6;
+  --color-primary: #e27a5c;
+  --color-primary-content: #211b18;
+  --color-secondary: #91b1a3;
+  --color-secondary-content: #172321;
+  --color-accent: #e2b85f;
+  --color-accent-content: #211b18;
+  --color-neutral: #293a36;
+  --color-neutral-content: #f0eee6;
+  --color-info: #81b4bd;
+  --color-info-content: #172321;
+  --color-success: #88b492;
+  --color-success-content: #172321;
+  --color-warning: #e0b15a;
+  --color-warning-content: #211b18;
+  --color-error: #e27a70;
+  --color-error-content: #211b18;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-studio-sans);
+  --font-display: var(--font-studio-display);
+  --color-studio-ink: #1f302d;
+  --color-studio-clay: #bd583d;
+  --color-studio-forest: #49675e;
+  --color-studio-gold: #d3a344;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-base-100);
+  color: var(--color-base-content);
+  font-family: var(--font-studio-sans), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-studio-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.page-title {
+  font-size: clamp(2.75rem, 7vw, 5.75rem);
+  line-height: 0.98;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.body-copy {
+  color: color-mix(in srgb, var(--color-base-content) 72%, transparent);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding: 0.75rem 1.35rem;
+  font: inherit;
+  font-size: 0.925rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.button-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+}
+
+.button-primary:hover {
+  background: color-mix(in srgb, var(--color-primary) 88%, black);
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  border-color: color-mix(in srgb, var(--color-base-content) 20%, transparent);
+  color: var(--color-base-content);
+}
+
+.button-secondary:hover {
+  background: var(--color-base-200);
+  border-color: color-mix(in srgb, var(--color-base-content) 36%, transparent);
+}
+
+.button-primary:focus-visible,
+.button-secondary:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
+  outline-offset: 3px;
+}
