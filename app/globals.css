@@ -152,7 +152,71 @@ h4 {
 }
 
 .button-primary:focus-visible,
-.button-secondary:focus-visible {
+.button-secondary:focus-visible,
+.button-hero-secondary:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
   outline-offset: 3px;
+}
+
+.button-hero-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.35rem;
+  font: inherit;
+  font-size: 0.925rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.button-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Swiper Hero Custom Pagination */
+.hero-swiper .swiper-pagination {
+  bottom: 2rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 20;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  width: 1.75rem;
+  height: 0.35rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  margin: 0 !important;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: all 250ms ease;
+}
+
+.hero-swiper .swiper-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  width: 3.5rem;
+  background: var(--color-accent, #d3a344);
 }
