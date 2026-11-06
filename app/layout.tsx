@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -43,9 +43,13 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <div className="flex min-h-screen flex-col">
-              <SiteHeader />
+              <Suspense>
+                <SiteHeader />
+              </Suspense>
               <div className="flex-1">{children}</div>
-              <SiteFooter />
+              <Suspense>
+                <SiteFooter />
+              </Suspense>
             </div>
             <Toaster position="top-right" richColors />
           </AuthProvider>
