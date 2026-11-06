@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Building2, Compass, Home, Search } from "lucide-react";
+import { ArrowLeft, Building2, Compass } from "lucide-react";
 
 interface EditStudio404Props {
   studioId: string;
