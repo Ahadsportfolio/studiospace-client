@@ -5,6 +5,14 @@ export type StudioCategory =
   | "Music Suite"
   | "Workshop";
 
+export const STUDIO_CATEGORIES: readonly StudioCategory[] = [
+  "Photo Studio",
+  "Film Stage",
+  "Podcast Lounge",
+  "Music Suite",
+  "Workshop",
+] as const;
+
 export interface StudioReview {
   name: string;
   photo: string;
