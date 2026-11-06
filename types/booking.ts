@@ -35,3 +35,4 @@ export interface CreateBookingPayload {
   endTime: string;
   notes?: string;
 }
+
