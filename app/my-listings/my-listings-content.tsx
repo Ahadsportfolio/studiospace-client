@@ -231,7 +231,7 @@ export function MyListingsContent() {
   const refreshStudios = useCallback(() => {
     setIsLoading(true);
     setError(null);
-    apiFetch<Studio[]>("studios/mine")
+    apiFetch<Studio[]>("/api/studios/mine")
       .then((data) => {
         setStudios(Array.isArray(data) ? data : []);
       })
@@ -250,7 +250,7 @@ export function MyListingsContent() {
   // Initial load
   useEffect(() => {
     let isMounted = true;
-    apiFetch<Studio[]>("studios/mine")
+    apiFetch<Studio[]>("/api/studios/mine")
       .then((data) => {
         if (isMounted) {
           setStudios(Array.isArray(data) ? data : []);
@@ -283,7 +283,7 @@ export function MyListingsContent() {
     setIsDeleting(true);
     try {
       await apiFetch<{ message: string; id: string }>(
-        `studios/${deletingStudio._id}`,
+        `/api/studios/${deletingStudio._id}`,
         {
           method: "DELETE",
         }

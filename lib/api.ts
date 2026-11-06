@@ -37,15 +37,18 @@ export async function apiFetch<T>(
     throw new Error("NEXT_PUBLIC_API_URL is not configured.");
   }
 
+  const base = apiUrl.replace(/\/$/, "").replace(/\/api$/, "");
+  const cleanPath = path.replace(/^\//, "");
+  const normalizedPath = cleanPath.startsWith("api/")
+    ? cleanPath
+    : `api/${cleanPath}`;
+
   let response: Response;
   try {
-    response = await fetch(
-      `${apiUrl.replace(/\/$/, "")}/${path.replace(/^\//, "")}`,
-      {
-        ...init,
-        credentials: "include",
-      },
-    );
+    response = await fetch(`${base}/${normalizedPath}`, {
+      ...init,
+      credentials: "include",
+    });
   } catch (error) {
     const reason =
       error instanceof Error ? error.message : "The network request failed.";
