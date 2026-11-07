@@ -167,7 +167,7 @@ export function SiteHeader() {
       {mobileMenuOpen && (
         <nav
           aria-label="Mobile navigation"
-          className="border-t border-base-300 bg-base-100 px-5 py-4 shadow-lg lg:hidden"
+          className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-base-300 bg-base-100 px-5 py-4 shadow-lg lg:hidden"
           id="mobile-navigation"
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-1">
@@ -224,14 +224,14 @@ export function SiteHeader() {
             ) : (
               <div className="mt-3 flex gap-3 border-t border-base-300 pt-4">
                 <Link
-                  className="button-secondary min-h-11 flex-1"
+                  className="button-secondary !min-h-10 !px-4 text-sm font-semibold flex-1"
                   href="/login"
                   onClick={closeMenu}
                 >
                   Login
                 </Link>
                 <Link
-                  className="button-primary min-h-11 flex-1"
+                  className="button-primary !min-h-10 !px-4 text-sm font-semibold flex-1"
                   href="/register"
                   onClick={closeMenu}
                 >

@@ -1,4 +1,4 @@
-import { Aperture, Sparkles } from "lucide-react";
+import { Aperture } from "lucide-react";
 
 export type BrandedSpinnerProps = {
   message?: string;

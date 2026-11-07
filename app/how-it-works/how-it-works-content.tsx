@@ -280,14 +280,14 @@ export function HowItWorksContent() {
             </p>
 
             {/* Role Switcher Tabs */}
-            <div className="mt-10 inline-flex rounded-full border border-base-300 bg-base-200/80 p-1.5 shadow-xs">
+            <div className="mt-10 inline-flex max-w-full flex-wrap justify-center sm:flex-nowrap rounded-2xl sm:rounded-full border border-base-300 bg-base-200/80 p-1.5 shadow-xs gap-1 sm:gap-0">
               <button
                 type="button"
                 onClick={() => setActiveRole("creator")}
-                className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
+                className={`flex items-center gap-2 rounded-xl sm:rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-all ${
                   activeRole === "creator"
                     ? "bg-primary text-primary-content shadow-xs"
-                    : "text-base-content/70 hover:text-base-content"
+                    : "text-base-content/80 hover:text-base-content"
                 }`}
               >
                 <Compass className="h-4 w-4" />
@@ -296,10 +296,10 @@ export function HowItWorksContent() {
               <button
                 type="button"
                 onClick={() => setActiveRole("host")}
-                className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
+                className={`flex items-center gap-2 rounded-xl sm:rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-all ${
                   activeRole === "host"
                     ? "bg-primary text-primary-content shadow-xs"
-                    : "text-base-content/70 hover:text-base-content"
+                    : "text-base-content/80 hover:text-base-content"
                 }`}
               >
                 <PlusCircle className="h-4 w-4" />
@@ -345,7 +345,7 @@ export function HowItWorksContent() {
                       <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                         <StepIcon className="h-6 w-6" aria-hidden="true" />
                       </span>
-                      <span className="font-serif text-3xl font-light text-base-content/30">
+                      <span className="font-serif text-3xl font-light text-base-content/50">
                         {step.number}
                       </span>
                     </div>
@@ -356,7 +356,7 @@ export function HowItWorksContent() {
                     <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary">
                       {step.subtitle}
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-base-content/70">
+                    <p className="mt-3 text-sm leading-relaxed text-base-content/80">
                       {step.description}
                     </p>
                   </div>

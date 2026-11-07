@@ -446,7 +446,7 @@ export function ExploreStudiosContent() {
 
               {/* Price Filter Dropdown / Popover */}
               {isPriceFilterOpen && (
-                <div className="absolute right-0 top-full z-30 mt-2 w-72 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-xl sm:w-80">
+                <div className="absolute left-0 lg:left-auto lg:right-0 top-full z-30 mt-2 w-72 max-w-[calc(100vw-2.5rem)] rounded-2xl border border-base-300 bg-base-100 p-4 shadow-xl sm:w-80">
                   <div className="flex items-center justify-between border-b border-base-300/70 pb-2.5">
                     <span className="text-xs font-bold uppercase tracking-wider text-base-content">
                       Hourly Rate ($ / hr)
@@ -566,12 +566,12 @@ export function ExploreStudiosContent() {
                 </span>
 
                 {searchParam && (
-                  <span className="inline-flex items-center gap-1 rounded-full border border-base-300 bg-base-100 px-3 py-1 text-xs text-base-content">
-                    <span>Search: &ldquo;{searchParam}&rdquo;</span>
+                  <span className="inline-flex items-center gap-1 rounded-full border border-base-300 bg-base-100 px-3 py-1 text-xs text-base-content max-w-full">
+                    <span className="truncate max-w-[170px] sm:max-w-xs">Search: &ldquo;{searchParam}&rdquo;</span>
                     <button
                       type="button"
                       onClick={handleClearSearch}
-                      className="text-base-content/50 hover:text-base-content"
+                      className="text-base-content/50 hover:text-base-content shrink-0"
                       aria-label="Remove search filter"
                     >
                       <X size={12} aria-hidden="true" />
@@ -779,7 +779,7 @@ export function ExploreStudiosContent() {
               </button>
 
               {/* Page Number Buttons */}
-              <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center justify-center gap-1">
                 {Array.from({ length: totalPages }, (_, i) => i + 1)
                   .filter((p) => {
                     // Show first, last, current, and neighbours

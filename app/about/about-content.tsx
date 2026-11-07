@@ -330,7 +330,7 @@ export function AboutContent() {
                     <h3 className="mt-5 font-serif text-xl font-medium text-base-content">
                       {val.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-base-content/70">
+                    <p className="mt-3 text-sm leading-relaxed text-base-content/80">
                       {val.description}
                     </p>
                   </div>
@@ -372,7 +372,7 @@ export function AboutContent() {
                     <h3 className="mt-4 font-serif text-lg font-medium text-base-content">
                       {d.label}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-base-content/70">
+                    <p className="mt-2 text-xs leading-relaxed text-base-content/80">
                       {d.description}
                     </p>
                   </div>
@@ -434,7 +434,7 @@ export function AboutContent() {
                       {member.name}
                     </h3>
                     <p className="text-xs font-semibold text-primary">{member.role}</p>
-                    <p className="mt-3 text-xs leading-relaxed text-base-content/70">
+                    <p className="mt-3 text-xs leading-relaxed text-base-content/80">
                       {member.bio}
                     </p>
                   </div>

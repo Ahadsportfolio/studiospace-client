@@ -82,7 +82,7 @@ export function StudioCategories() {
             <Link
               key={category}
               href={`/studios?category=${encodeURIComponent(category)}`}
-              className="group flex min-h-56 flex-col rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="group flex h-full min-h-56 flex-col rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <span
                 className={`flex h-12 w-12 items-center justify-center rounded-2xl ${iconStyle}`}
@@ -92,7 +92,7 @@ export function StudioCategories() {
               <h3 className="mt-5 font-display text-xl font-normal text-base-content transition-colors group-hover:text-primary">
                 {label}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-base-content/70">
+              <p className="mt-2 text-sm leading-relaxed text-base-content/80">
                 {description}
               </p>
               <span className="mt-auto flex items-center gap-1 pt-5 text-sm font-semibold text-primary">

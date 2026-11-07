@@ -364,7 +364,7 @@ export function BookingModal({
     >
       <div className="relative w-full max-w-2xl max-h-[92vh] flex flex-col rounded-3xl border border-base-300 bg-base-100 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-base-200 px-6 py-4.5 bg-base-100 shrink-0">
+        <div className="flex items-center justify-between border-b border-base-200 px-4 sm:px-6 py-4 bg-base-100 shrink-0">
           <div className="flex items-center gap-3 min-w-0">
             <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-base-300 bg-base-200">
               <Image
@@ -412,7 +412,7 @@ export function BookingModal({
         {/* Scrollable Form Body */}
         <form
           onSubmit={handleSubmit}
-          className="flex-1 overflow-y-auto px-6 py-5 space-y-6"
+          className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-5 space-y-5 sm:space-y-6"
         >
           {/* Host Warning if logged-in user is host */}
           {isHost && (
@@ -744,7 +744,7 @@ export function BookingModal({
         </form>
 
         {/* Modal Actions Footer */}
-        <div className="flex items-center justify-end gap-3 border-t border-base-200 px-6 py-4 bg-base-100 shrink-0">
+        <div className="flex items-center justify-end gap-3 border-t border-base-200 px-4 sm:px-6 py-4 bg-base-100 shrink-0">
           <button
             type="button"
             onClick={onClose}

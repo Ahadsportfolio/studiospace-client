@@ -10,7 +10,7 @@ export function Brand({ inverse = false }: BrandProps) {
     <Link
       aria-label="StudioSpace home"
       className={`inline-flex items-center gap-2.5 font-semibold tracking-tight ${
-        inverse ? "text-base-100" : "text-base-content"
+        inverse ? "text-neutral-content" : "text-base-content"
       }`}
       href="/"
     >

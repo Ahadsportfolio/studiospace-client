@@ -60,7 +60,7 @@ export function StudioCard({ studio }: StudioCardProps) {
             {studio.category}
           </span>
           {studio.maxCapacity ? (
-            <span className="inline-flex items-center gap-1 text-xs text-base-content/60">
+            <span className="inline-flex items-center gap-1 text-xs text-base-content/70">
               <Users size={12} aria-hidden="true" />
               <span>Up to {studio.maxCapacity} creators</span>
             </span>
@@ -71,7 +71,7 @@ export function StudioCard({ studio }: StudioCardProps) {
           {studio.title}
         </h3>
 
-        <div className="mt-2.5 flex items-center gap-1.5 text-xs text-base-content/70">
+        <div className="mt-2.5 flex items-center gap-1.5 text-xs text-base-content/75">
           <MapPin
             size={14}
             aria-hidden="true"
@@ -83,13 +83,13 @@ export function StudioCard({ studio }: StudioCardProps) {
           </span>
         </div>
 
-        <p className="mt-3.5 line-clamp-2 text-sm leading-relaxed text-base-content/75">
+        <p className="mt-3.5 line-clamp-2 text-sm leading-relaxed text-base-content/80">
           {studio.overview}
         </p>
 
         <div className="mt-auto flex items-center justify-between gap-4 border-t border-base-300/70 pt-6">
           <div className="flex flex-col">
-            <span className="text-[11px] font-medium uppercase tracking-wider text-base-content/60">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-base-content/70">
               Rate
             </span>
             <div className="flex items-baseline gap-1">
@@ -99,7 +99,7 @@ export function StudioCard({ studio }: StudioCardProps) {
                   maximumFractionDigits: 2,
                 })}
               </span>
-              <span className="text-xs font-medium text-base-content/65">
+              <span className="text-xs font-medium text-base-content/70">
                 / hr
               </span>
             </div>

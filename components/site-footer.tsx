@@ -53,7 +53,7 @@ export function SiteFooter() {
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1fr_1.2fr] lg:px-10 lg:py-16">
         <div>
           <Brand inverse />
-          <p className="mt-5 max-w-xs text-sm leading-7 text-neutral-content/70">
+          <p className="mt-5 max-w-xs text-sm leading-7 text-neutral-content/80">
             A little more room for the work you want to make. Find the right
             creative space, meet the people behind it, and get to making.
           </p>
@@ -154,7 +154,7 @@ export function SiteFooter() {
               type="email"
               value={email}
             />
-            <button className="btn btn-primary" type="submit">
+            <button className="button-primary !min-h-10 !px-5 text-sm font-semibold shrink-0" type="submit">
               Join
             </button>
           </form>
@@ -162,7 +162,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-neutral-content/15">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-6 py-5 text-xs text-neutral-content/60 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-6 py-5 text-xs text-neutral-content/75 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
           <p>© StudioSpace. Made for makers.</p>
           <div className="flex gap-5">
             <Link className="transition-colors hover:text-neutral-content" href="/terms">

@@ -64,7 +64,7 @@ export function HostGuarantee() {
           {creatorSupport.map(({ title, description, Icon }) => (
             <li
               key={title}
-              className="flex min-h-56 flex-col rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm"
+              className="flex h-full min-h-56 flex-col rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm"
             >
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/15 text-secondary">
                 <Icon size={22} aria-hidden="true" />
@@ -72,7 +72,7 @@ export function HostGuarantee() {
               <h3 className="mt-5 font-display text-xl font-normal text-base-content">
                 {title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-base-content/70">
+              <p className="mt-2 text-sm leading-relaxed text-base-content/80">
                 {description}
               </p>
             </li>

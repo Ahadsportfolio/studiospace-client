@@ -350,10 +350,10 @@ function BookingsSkeletonList() {
       {[1, 2, 3].map((key) => (
         <div
           key={key}
-          className="card bg-base-100 border border-base-300 rounded-3xl p-6 shadow-xs animate-pulse flex flex-col md:flex-row gap-6"
+          className="card bg-base-100 border border-base-300 rounded-3xl overflow-hidden shadow-xs animate-pulse flex flex-col md:flex-row"
         >
-          <div className="h-44 md:h-40 md:w-64 rounded-2xl bg-base-300 shrink-0" />
-          <div className="flex-1 space-y-4 py-1">
+          <div className="h-52 md:h-auto md:w-72 bg-base-300 shrink-0" />
+          <div className="flex-1 space-y-4 p-5 sm:p-6">
             <div className="flex justify-between items-start gap-4">
               <div className="space-y-2 flex-1">
                 <div className="h-3 w-28 bg-base-300 rounded-md" />

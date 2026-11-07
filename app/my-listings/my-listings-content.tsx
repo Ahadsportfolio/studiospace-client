@@ -177,7 +177,7 @@ function MobileStudioCard({
         </div>
 
         {/* Card Footer Actions */}
-        <div className="mt-5 pt-4 border-t border-base-200 flex items-center justify-between gap-2">
+        <div className="mt-auto pt-4 border-t border-base-200 flex items-center justify-between gap-2">
           <Link
             href={`/studios/${studio._id}`}
             className="btn btn-sm btn-ghost rounded-xl gap-1.5 text-xs"
