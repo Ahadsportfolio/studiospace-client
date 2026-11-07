@@ -6,6 +6,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
+  Compass,
   MapPin,
   RefreshCw,
   Sparkles,
@@ -175,18 +176,22 @@ export function FeaturedStudios() {
               </button>
             </div>
           ) : studios.length === 0 ? (
-            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-base-300 bg-base-200/50 p-10 text-center">
-              <p className="font-semibold text-base-content">
-                No featured studios are available right now.
-              </p>
-              <p className="mt-2 text-sm text-base-content/70">
-                Browse all studios to find a space for your next project.
+            <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-base-300 bg-base-100 p-8 sm:p-14 text-center shadow-xs">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <Compass className="h-8 w-8" />
+              </div>
+              <h3 className="mt-4 font-serif text-xl sm:text-2xl font-medium text-base-content">
+                No Featured Studios Currently Highlighted
+              </h3>
+              <p className="mt-2 max-w-md text-sm text-base-content/70">
+                Browse our full directory of photo studios, film stages, sound suites, and workshops to find the perfect space for your production.
               </p>
               <Link
                 href="/studios"
-                className="button-secondary mt-5 !min-h-10 !px-4 text-xs font-semibold"
+                className="button-primary mt-6 !min-h-11 !px-6 text-sm font-semibold inline-flex items-center gap-2 shadow-md shadow-primary/20"
               >
-                Explore Studios
+                <Compass className="h-4 w-4" />
+                <span>Explore All Studios</span>
               </Link>
             </div>
           ) : (
