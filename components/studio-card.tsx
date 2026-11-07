@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, MapPin, Star, Users } from "lucide-react";
+import { ArrowUpRight, Heart, MapPin, Star, Users } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
+import { useWishlist } from "@/providers/wishlist-provider";
 import type { Studio } from "@/types/studio";
 
 interface StudioCardProps {
@@ -11,10 +13,28 @@ interface StudioCardProps {
 }
 
 export function StudioCard({ studio }: StudioCardProps) {
+  const { user } = useAuth();
+  const { isSaved, toggleWishlist } = useWishlist();
+  const [isToggling, setIsToggling] = useState(false);
+
   const [imgSrc, setImgSrc] = useState(
     studio.image ||
       "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80"
   );
+
+  const saved = studio._id ? isSaved(studio._id) : false;
+
+  const handleToggleWishlist = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user || isToggling) return;
+    setIsToggling(true);
+    try {
+      await toggleWishlist(studio);
+    } finally {
+      setIsToggling(false);
+    }
+  };
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl">
@@ -39,19 +59,44 @@ export function StudioCard({ studio }: StudioCardProps) {
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           {studio.category}
         </span>
-        <span className="absolute right-3.5 top-3.5 z-10 inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/95 px-2.5 py-1 text-xs font-bold text-neutral-900 shadow-sm backdrop-blur-md">
-          <Star
-            size={13}
-            aria-hidden="true"
-            className="fill-amber-500 text-amber-500"
-          />
-          <span>{Number(studio.rating || 0).toFixed(1)}</span>
-          {typeof studio.reviewCount === "number" && studio.reviewCount > 0 && (
-            <span className="text-[10px] font-medium text-neutral-500">
-              ({studio.reviewCount})
-            </span>
+        <div className="absolute right-3.5 top-3.5 z-10 flex items-center gap-1.5">
+          <span className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/95 px-2.5 py-1 text-xs font-bold text-neutral-900 shadow-sm backdrop-blur-md">
+            <Star
+              size={13}
+              aria-hidden="true"
+              className="fill-amber-500 text-amber-500"
+            />
+            <span>{Number(studio.rating || 0).toFixed(1)}</span>
+            {typeof studio.reviewCount === "number" && studio.reviewCount > 0 && (
+              <span className="text-[10px] font-medium text-neutral-500">
+                ({studio.reviewCount})
+              </span>
+            )}
+          </span>
+
+          {user && (
+            <button
+              type="button"
+              onClick={handleToggleWishlist}
+              disabled={isToggling}
+              aria-label={saved ? "Remove from wishlist" : "Save to wishlist"}
+              title={saved ? "Remove from wishlist" : "Save to wishlist"}
+              className={`flex h-7 w-7 items-center justify-center rounded-full border shadow-sm backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-95 ${
+                saved
+                  ? "border-rose-400/60 bg-rose-500 text-white shadow-rose-500/30"
+                  : "border-white/30 bg-black/60 text-white hover:bg-black/80 hover:text-rose-400"
+              }`}
+            >
+              <Heart
+                size={14}
+                aria-hidden="true"
+                className={`transition-all ${
+                  saved ? "fill-white text-white scale-105" : "fill-transparent"
+                }`}
+              />
+            </button>
           )}
-        </span>
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col p-6">

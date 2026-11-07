@@ -15,6 +15,7 @@ import {
   Clock,
   ExternalLink,
   FileText,
+  Heart,
   Loader2,
   Plus,
   RefreshCw,
@@ -32,6 +33,9 @@ import type { Booking, BookingStatus } from "@/types/booking";
 import type { Studio } from "@/types/studio";
 import { DeclineBookingModal } from "./decline-booking-modal";
 import { BookingNotesModal } from "./booking-notes-modal";
+import { StudioCard } from "@/components/studio-card";
+import { StudioCardSkeleton } from "@/components/studio-card-skeleton";
+import { useWishlist } from "@/providers/wishlist-provider";
 
 const FALLBACK_STUDIO_IMAGE =
   "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80";
@@ -121,6 +125,7 @@ function getStatusBadgeConfig(status: BookingStatus) {
 
 export function DashboardContent() {
   const { user } = useAuth();
+  const { wishlist, loading: isWishlistLoading, refreshWishlist } = useWishlist();
 
   const [hostBookings, setHostBookings] = useState<Booking[]>([]);
   const [myBookings, setMyBookings] = useState<Booking[]>([]);
@@ -148,6 +153,7 @@ export function DashboardContent() {
         apiFetch<Booking[]>("api/bookings/host"),
         apiFetch<Studio[]>("api/studios/mine"),
         apiFetch<Booking[]>("api/bookings/my"),
+        refreshWishlist().catch(() => {}),
       ]);
 
       setHostBookings(Array.isArray(hostRes) ? hostRes : []);
@@ -421,6 +427,13 @@ export function DashboardContent() {
             >
               My Bookings <ArrowRight className="h-3 w-3" />
             </Link>
+            <span>•</span>
+            <a
+              href="#saved-studios"
+              className="link link-hover inline-flex items-center gap-1 font-medium text-rose-500"
+            >
+              Saved Studios ({wishlist.length}) <ArrowRight className="h-3 w-3" />
+            </a>
           </div>
         </div>
       </div>
@@ -1120,6 +1133,77 @@ export function DashboardContent() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Saved Studios Section */}
+      <div id="saved-studios" className="mt-10 rounded-2xl border border-base-300 bg-base-100 shadow-sm">
+        <div className="border-b border-base-300 p-5 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-500/10 text-rose-500">
+                <Heart className="h-5 w-5 fill-rose-500 text-rose-500" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="font-serif text-2xl font-medium tracking-tight text-base-content">
+                    Saved Studios
+                  </h2>
+                  <span className="badge badge-sm border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold">
+                    {wishlist.length} {wishlist.length === 1 ? "space" : "spaces"}
+                  </span>
+                </div>
+                <p className="mt-1 text-xs text-base-content/70 sm:text-sm">
+                  Creative workspaces, sound stages, and podcast suites bookmarked for your upcoming productions.
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href="/studios"
+              className="btn btn-outline btn-sm rounded-xl gap-2 shadow-xs text-xs self-start sm:self-auto"
+            >
+              <span>Explore More Studios</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="p-5 sm:p-6">
+          {isWishlistLoading ? (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((i) => (
+                <StudioCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : wishlist.length === 0 ? (
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-base-300 py-12 px-4 text-center">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-rose-500/10 text-rose-500">
+                <Heart className="h-7 w-7 text-rose-500" />
+              </div>
+              <h3 className="mt-4 font-serif text-xl font-medium text-base-content">
+                No Saved Studios Yet
+              </h3>
+              <p className="mx-auto mt-2 max-w-md text-sm text-base-content/70">
+                Explore verified photo cyc walls, film stages, podcast lounges, and recording suites, then tap the heart icon on any studio card to save it here.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <Link
+                  href="/studios"
+                  className="button-primary !min-h-10 !px-5 !py-2 text-xs font-semibold shadow-sm shadow-primary/20"
+                >
+                  <span>Explore Studios</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {wishlist.map((studio) => (
+                <StudioCard key={studio._id} studio={studio} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Decline Booking Custom Modal */}

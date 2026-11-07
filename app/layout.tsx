@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { AuthProvider } from "@/providers/auth-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { WishlistProvider } from "@/providers/wishlist-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -42,16 +43,18 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <AuthProvider>
-            <div className="flex min-h-screen flex-col">
-              <Suspense>
-                <SiteHeader />
-              </Suspense>
-              <div className="flex-1">{children}</div>
-              <Suspense>
-                <SiteFooter />
-              </Suspense>
-            </div>
-            <Toaster position="top-right" richColors />
+            <WishlistProvider>
+              <div className="flex min-h-screen flex-col">
+                <Suspense>
+                  <SiteHeader />
+                </Suspense>
+                <div className="flex-1">{children}</div>
+                <Suspense>
+                  <SiteFooter />
+                </Suspense>
+              </div>
+              <Toaster position="top-right" richColors />
+            </WishlistProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
