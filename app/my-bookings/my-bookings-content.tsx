@@ -11,7 +11,9 @@ import {
   CheckCheck,
   CheckCircle2,
   Clock,
+  Download,
   ExternalLink,
+  Loader2,
   Mail,
   MessageSquare,
   RefreshCw,
@@ -25,6 +27,7 @@ import { toast } from "sonner";
 import { apiFetch, ApiError } from "@/lib/api";
 import { useAuth } from "@/providers/auth-provider";
 import type { Booking, BookingStatus } from "@/types/booking";
+import { generateBookingInvoice } from "@/lib/invoice-generator";
 import { CancelBookingModal } from "./cancel-booking-modal";
 
 const FALLBACK_STUDIO_IMAGE =
@@ -132,8 +135,22 @@ interface BookingCardProps {
 
 function BookingCard({ booking, onCancelRequest }: BookingCardProps) {
   const [hasImageError, setHasImageError] = useState(false);
+  const [isDownloadingInvoice, setIsDownloadingInvoice] = useState(false);
   const statusConfig = getStatusBadgeConfig(booking.status);
   const StatusIcon = statusConfig.icon;
+
+  const handleDownloadInvoice = async () => {
+    setIsDownloadingInvoice(true);
+    try {
+      generateBookingInvoice(booking);
+      toast.success("Invoice downloaded successfully!");
+    } catch (err) {
+      console.error("Failed to generate PDF invoice:", err);
+      toast.error("Failed to generate PDF invoice. Please try again.");
+    } finally {
+      setIsDownloadingInvoice(false);
+    }
+  };
 
   const imageSrc =
     hasImageError || !booking.studioImage
@@ -325,6 +342,24 @@ function BookingCard({ booking, onCancelRequest }: BookingCardProps) {
               <span>View Studio</span>
               <ExternalLink className="h-3 w-3" />
             </Link>
+
+            {/* Download Invoice for Confirmed (and Completed) bookings */}
+            {(booking.status === "Confirmed" || booking.status === "Completed") && (
+              <button
+                type="button"
+                onClick={handleDownloadInvoice}
+                disabled={isDownloadingInvoice}
+                className="btn btn-outline btn-primary btn-sm rounded-xl gap-1.5 text-xs font-medium hover:text-white transition-colors cursor-pointer"
+                title="Download StudioSpace PDF Invoice"
+              >
+                {isDownloadingInvoice ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Download className="h-3.5 w-3.5" />
+                )}
+                <span>Download Invoice</span>
+              </button>
+            )}
 
             {/* Cancel Booking only for Pending status */}
             {booking.status === "Pending" && (
