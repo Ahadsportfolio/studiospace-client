@@ -68,3 +68,4 @@ export default function HowItWorksLoading() {
     </main>
   );
 }
+
