@@ -95,13 +95,13 @@ cp .env.example .env.local
 
 Edit `.env.local`:
 ```env
-NEXT_PUBLIC_API_URL=https://studiospace-server-meof.onrender.com
-BETTER_AUTH_SECRET=100eadd94d695067048359ffa38d77b1cac3a2657f384e6702240803394f8f27
-BETTER_AUTH_URL=https://studiospace-client-mn86gsajf-organicseller655-6391s-projects.vercel.app/
-MONGODB_URI=mongodb://studiospace:e2SVfTzLd99Iw5Ks@ac-ppb0vel-shard-00-00.ilil4lk.mongodb.net:27017,ac-ppb0vel-shard-00-01.ilil4lk.mongodb.net:27017,ac-ppb0vel-shard-00-02.ilil4lk.mongodb.net:27017/?ssl=true&replicaSet=atlas-pqgi87-shard-0&authSource=admin&compressors=zlib
-GOOGLE_CLIENT_ID=620429196764-2ngbi820qu292ap33oakabp91do1ru7o.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=DvUR
-NEXT_PUBLIC_IMGBB_KEY=3900c8c493f2e277a58eb7f5aa0428b9
+NEXT_PUBLIC_API_URL=http://localhost:5000
+BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_SECRET=replace-with-a-long-random-string
+MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>/<db>
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+NEXT_PUBLIC_IMGBB_KEY=your-imgbb-key
 ```
 
 ### 4. Run Development Server
