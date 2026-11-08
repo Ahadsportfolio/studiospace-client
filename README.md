@@ -7,11 +7,10 @@ StudioSpace is a peer-to-peer marketplace where hosts list creative production s
 ## 🔗 Deployment & Links
 
 | Service | Link / Target |
-|---|---|
-| **Live Web App (Client)** | [https://studiospace-client.vercel.app](https://studiospace-client.vercel.app) *(Replace with your deployed Vercel domain)* |
-| **API Server (Backend)** | [https://studiospace-server-meof.onrender.com](https://studiospace-server-meof.onrender.com) |
-| **Client Repository** | [https://github.com/YOUR-USERNAME/studiospace-client](https://github.com/YOUR-USERNAME/studiospace-client) |
-| **Server Repository** | [https://github.com/YOUR-USERNAME/studiospace-server](https://github.com/YOUR-USERNAME/studiospace-server) |
+| **Live Web App (Client)** | [https://studiospace-client-mn86gsajf-organicseller655-6391s-projects.vercel.app]
+| **API Server (Backend)** | [https://studiospace-server-meof.onrender.com]
+| **Client Repository** | [https://github.com/Ahadsportfolio/studiospace-client.git]
+| **Server Repository** | [https://github.com/Ahadsportfolio/studiospace-server.git]
 
 ---
 
@@ -81,7 +80,7 @@ StudioSpace is a peer-to-peer marketplace where hosts list creative production s
 ### 2. Installation
 ```bash
 # Clone the client repository
-git clone https://github.com/YOUR-USERNAME/studiospace-client.git
+git clone https://github.com/Ahadsportfolio/studiospace-client.git
 cd studiospace-client
 
 # Install dependencies
@@ -96,14 +95,13 @@ cp .env.example .env.local
 
 Edit `.env.local`:
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-BETTER_AUTH_SECRET=your-random-secret-at-least-32-chars-long
-BETTER_AUTH_URL=http://localhost:3000
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/studiospace?retryWrites=true&w=majority
-DB_NAME=studiospace
-GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-NEXT_PUBLIC_IMGBB_KEY=your-imgbb-api-key
+NEXT_PUBLIC_API_URL=https://studiospace-server-meof.onrender.com
+BETTER_AUTH_SECRET=100eadd94d695067048359ffa38d77b1cac3a2657f384e6702240803394f8f27
+BETTER_AUTH_URL=https://studiospace-client-mn86gsajf-organicseller655-6391s-projects.vercel.app/
+MONGODB_URI=mongodb://studiospace:e2SVfTzLd99Iw5Ks@ac-ppb0vel-shard-00-00.ilil4lk.mongodb.net:27017,ac-ppb0vel-shard-00-01.ilil4lk.mongodb.net:27017,ac-ppb0vel-shard-00-02.ilil4lk.mongodb.net:27017/?ssl=true&replicaSet=atlas-pqgi87-shard-0&authSource=admin&compressors=zlib
+GOOGLE_CLIENT_ID=620429196764-2ngbi820qu292ap33oakabp91do1ru7o.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=DvUR
+NEXT_PUBLIC_IMGBB_KEY=3900c8c493f2e277a58eb7f5aa0428b9
 ```
 
 ### 4. Run Development Server
