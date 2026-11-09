@@ -44,7 +44,7 @@ export async function apiFetch<T>(
     : `api/${cleanPath}`;
 
   let response: Response;
-  try {
+  const doFetch = async () => {
     const headers = new Headers(init.headers);
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("studiospace_token");
@@ -53,15 +53,25 @@ export async function apiFetch<T>(
       }
     }
 
-    response = await fetch(`${base}/${normalizedPath}`, {
+    return await fetch(`${base}/${normalizedPath}`, {
       ...init,
       headers,
       credentials: "include",
     });
+  };
+
+  try {
+    response = await doFetch();
   } catch (error) {
-    const reason =
-      error instanceof Error ? error.message : "The network request failed.";
-    throw new ApiError(`Could not reach the StudioSpace server: ${reason}`, 0);
+    // If the first attempt fails (e.g. Render spin-down waking up or transient network blip), retry once
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      response = await doFetch();
+    } catch {
+      const reason =
+        error instanceof Error ? error.message : "The network request failed.";
+      throw new ApiError(`Could not reach the StudioSpace server: ${reason}`, 0);
+    }
   }
 
   const responseText = await response.text();
