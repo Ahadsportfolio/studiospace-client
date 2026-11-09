@@ -24,16 +24,25 @@ const database = mongoClient.db(process.env.DB_NAME || "studiospace");
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
+const rawBaseUrl =
+  process.env.BETTER_AUTH_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+
+const resolvedBaseUrl = rawBaseUrl
+  ? rawBaseUrl.replace(/\/+$/, "")
+  : process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : undefined;
+
 export const auth = betterAuth({
   appName: "StudioSpace",
-  baseURL:
-    process.env.BETTER_AUTH_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+  baseURL: resolvedBaseUrl,
   secret: authSecret,
   trustedOrigins: [
-    ...(process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : []),
-    ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
-    ...(process.env.NEXT_PUBLIC_CLIENT_URL ? [process.env.NEXT_PUBLIC_CLIENT_URL] : []),
+    ...(resolvedBaseUrl ? [resolvedBaseUrl] : []),
+    ...(process.env.NEXT_PUBLIC_CLIENT_URL
+      ? [process.env.NEXT_PUBLIC_CLIENT_URL.replace(/\/+$/, "")]
+      : []),
     "https://studiospace-client.vercel.app",
     "https://*.vercel.app",
     "http://localhost:3000",
