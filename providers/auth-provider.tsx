@@ -53,14 +53,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return pendingExchange.current.promise;
     }
 
-    const promise = apiFetch("api/auth/jwt", {
+    const promise = apiFetch<{ success: boolean; token?: string }>("api/auth/jwt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sessionToken }),
     })
-      .then(() => {
+      .then((data) => {
+        if (data?.token && typeof window !== "undefined") {
+          localStorage.setItem("studiospace_token", data.token);
+        }
         setExchangedToken(sessionToken);
-      setFailedToken(null);
+        setFailedToken(null);
       })
       .catch((error: unknown) => {
         if (pendingExchange.current?.token === sessionToken) {
@@ -139,6 +142,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("studiospace_token");
+    }
+
     const results = await Promise.allSettled([
       apiFetch("api/auth/logout", { method: "POST" }),
       authClient.signOut().then((result) => {

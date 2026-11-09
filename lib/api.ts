@@ -45,8 +45,17 @@ export async function apiFetch<T>(
 
   let response: Response;
   try {
+    const headers = new Headers(init.headers);
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("studiospace_token");
+      if (token && !headers.has("Authorization")) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+    }
+
     response = await fetch(`${base}/${normalizedPath}`, {
       ...init,
+      headers,
       credentials: "include",
     });
   } catch (error) {
